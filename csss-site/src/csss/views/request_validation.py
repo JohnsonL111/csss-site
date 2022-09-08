@@ -24,6 +24,26 @@ def validate_request_to_update_digital_resource_permissions(request):
         return
     raise InvalidPrivilege(request)
 
+def validate_request_to_valdate_digital_resource_permissions(request):
+    """
+    Ensure that the request is made by either root or someone who is allowed to modify the
+     digital resources permissions
+
+    Keyword Argument
+    request -- the django request object
+    endpoint -- the endpoint to call if there is an error
+
+    Exception thrown if the request is made by someone who is not allowed to modify the digital resources
+     permissions
+    """
+    if request.user.username == "root":
+        return
+    unprocessed_officers = UnProcessedOfficer.objects.all()
+    officers = Officer.objects.all()
+    if user_is_officer_in_past_5_terms(request, unprocessed_officers=unprocessed_officers, officers=officers):
+        return
+    raise InvalidPrivilege(request)
+
 
 def validate_request_to_update_gdrive_permissions(request):
     """

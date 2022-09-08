@@ -259,6 +259,33 @@ def create_context_for_election_officer(request, tab=None):
         unprocessed_officers=unprocessed_officers, officers=officers
     )
 
+def create_context_for_validate_digital_resources(request, tab=None):
+    """
+    Create the context for the pages where the user can add or update the cron timers and also trigger them
+
+    Keyword Arguments
+    request -- the django request object
+    tab -- the tab for the page that the user is on
+    endpoint -- the endpoint to redirect to if an error is experienced
+    html -- the html page to redirect to if an error is experienced
+
+    Return
+    context -- the context dictionary for the html
+
+    Exception
+    throws  InvalidPrivilege if either the html or endpoint is not specified of authentication_method is not specified
+     or the user is trying to access a page they are not allowed to
+    """
+    unprocessed_officers = None
+    officers = None
+    if request.user.username != "root":
+        unprocessed_officers = UnProcessedOfficer.objects.all()
+        officers = Officer.objects.all().order_by('-start_date')
+    return _create_context_for_authenticated_user(
+        request, authentication_method=user_is_current_sys_admin, tab=tab,
+        unprocessed_officers=unprocessed_officers, officers=officers
+    )
+
 
 def _create_context_for_authenticated_user(request, authentication_method=None,
                                            tab=None, unprocessed_officers=None, officers=None):
