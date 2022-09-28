@@ -17,15 +17,11 @@ class Command(BaseCommand):
         print("setting up cron service")
         scheduler = BlockingScheduler()
         cron_jobs = CronJob.objects.all()
+        # getattr(importlib.import_module("about.management.commands.test", package='CronJob'), "CronJob")
         for cron_job in cron_jobs:
             logger.info(f"[csss/cron_service.py cron()] adding job {cron_job.job_name} to the scheduler")
-            file_name = CRON_JOB_MAPPING[cron_job.job_name]['file_name']
-            class_name = CRON_JOB_MAPPING[cron_job.job_name]['class_name']
             scheduler.add_job(
-                getattr(
-                    importlib.import_module(file_name),
-                    class_name
-                ).run_job,
+                importlib.import_module('about.views.commands.nag_officers_to_enter_info').run_job,
                 CronTrigger.from_crontab(cron_job.schedule)
             )
             logger.info(f"[csss/cron_service.py cron()] job {cron_job.job_name} added to the scheduler")
