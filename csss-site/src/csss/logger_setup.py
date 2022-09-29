@@ -3,7 +3,9 @@ import logging
 import pytz
 import sys
 
-
+fix this up so that the cron jobs go into their own separate files
+https://www.youtube.com/watch?v=-ARI4Cz-awo
+https://www.youtube.com/watch?v=jxmzY9soFXg
 class LoggerWriter:
     def __init__(self, logger, level):
         self.logger = logger
