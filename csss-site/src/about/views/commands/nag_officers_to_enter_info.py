@@ -1,15 +1,13 @@
-import logging
-
 from about.models import UnProcessedOfficer, Officer
 from about.views.input_new_officers.specify_new_officers.notifications. \
     send_notification_asking_officer_to_fill_in_form import \
     send_notification_asking_officer_to_fill_in_form
+from csss.setup_logger import get_logger
 from csss.views.send_discord_dm import send_discord_dm
-
-logger = logging.getLogger('csss_site')
 
 
 def run_job():
+    logger = get_logger()
     unprocessed_officers = UnProcessedOfficer.objects.all()
     officers = Officer.objects.all()
     for unprocessed_officer in unprocessed_officers:

@@ -259,6 +259,7 @@ def create_context_for_election_officer(request, tab=None):
         unprocessed_officers=unprocessed_officers, officers=officers
     )
 
+
 def create_context_for_validate_digital_resources(request, tab=None):
     """
     Create the context for the pages where the user can add or update the cron timers and also trigger them

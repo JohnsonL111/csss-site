@@ -24,6 +24,7 @@ def validate_request_to_update_digital_resource_permissions(request):
         return
     raise InvalidPrivilege(request)
 
+
 def validate_request_to_valdate_digital_resource_permissions(request):
     """
     Ensure that the request is made by either root or someone who is allowed to modify the

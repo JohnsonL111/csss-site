@@ -1,12 +1,12 @@
-import logging
+from csss.setup_logger import get_logger
 
-logger = logging.getLogger('csss_site')
+logger = get_logger()
 
 
 def determine_changes_for_exec_discord_group_role_validation(
     user_id__user_obj, role_id__list_of_users, role_id__role, members_id__role_ids,
     discord_id_for_users_that_should_be_in_exec_discord_group_role,
-    exec_discord_role_id):
+        exec_discord_role_id):
     """
     Populates/Updates members_id__role_ids to reflect the changes needed to ensure only the current officers have
      the Execs discord group role

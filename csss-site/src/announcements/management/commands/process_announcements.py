@@ -1,10 +1,9 @@
-import logging
-
 from django.core.management.base import BaseCommand
 
 from announcements.views.commands.process_announcements import process_announcements
+from csss.setup_logger import get_logger
 
-logger = logging.getLogger('csss_site')
+logger = get_logger()
 
 
 class Command(BaseCommand):

@@ -1,10 +1,11 @@
 import datetime
-import logging
 
 import pytz
 from django.conf import settings
 
-logger = logging.getLogger('csss_site')
+from csss.setup_logger import get_logger
+
+logger = get_logger()
 
 
 def add_sortable_date_to_manual_announcement(timezone_difference, manual_announcement):

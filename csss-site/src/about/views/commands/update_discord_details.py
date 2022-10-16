@@ -1,14 +1,13 @@
-import logging
 from time import sleep
 
 from about.models import Officer
 from about.views.input_new_officers.enter_new_officer_info.utils.get_discord_username_and_nickname import \
     get_discord_username_and_nickname
-
-logger = logging.getLogger('csss_site')
+from csss.setup_logger import get_logger
 
 
 def run_job():
+    logger = get_logger()
     all_officers = Officer.objects.all()
     officers = all_officers.exclude(discord_id="NA")
     officers_discord_ids = list(set(list(officers.values_list('discord_id', flat=True))))

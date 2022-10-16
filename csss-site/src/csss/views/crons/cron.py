@@ -1,14 +1,13 @@
-import logging
-
 from django.shortcuts import render
 
 from csss.models import CronJob
+from csss.setup_logger import get_logger
 from csss.views.context_creation.create_authenticated_contexts import create_context_for_validate_digital_resources
 from csss.views.context_creation.create_context_for_crons_html import create_context_for_crons_html
 from csss.views.crons.process_specified_cron_request import process_specified_cron_request
 from resource_management.views.gdrive_views import TAB_STRING
 
-logger = logging.getLogger('csss_site')
+logger = get_logger()
 
 
 def cron(request):

@@ -1,4 +1,5 @@
 import importlib
+import logging
 
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -16,7 +17,7 @@ def process_specified_cron_request(request, cron_jobs, context):
     job_to_run = request.POST['job_to_run'] if 'job_to_run' in request.POST else None
     if job_to_run:
         job_config = CRON_JOB_MAPPING[job_to_run]
-        importlib.import_module(f"{job_config['path']}{job_to_run}").run_job()
+        importlib.import_module(f"{job_config['path']}{job_to_run}").run_job(logging.getLogger('csss_site'))
         create_context_for_crons_html(
             context, cron_jobs, draft_cron_jobs=draft_cron_jobs
         )

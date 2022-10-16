@@ -1,15 +1,14 @@
-import logging
 import os
 
 from django.conf import settings
 
 from about.models import Officer
 from about.views.utils.get_officer_image_path import get_officer_image_path
-
-logger = logging.getLogger('csss_site')
+from csss.setup_logger import get_logger
 
 
 def run_job(download=False):
+    logger = get_logger()
     if download:
         os.system(
             "rm -fr about/static/about_static/exec-photos || true; "

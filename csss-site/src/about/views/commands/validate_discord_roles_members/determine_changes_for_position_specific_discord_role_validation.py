@@ -1,14 +1,15 @@
-import logging
+from csss.setup_logger import get_logger
+
 
 from about.models import Officer
-logger = logging.getLogger('csss_site')
+logger = get_logger()
 
 
 def determine_changes_for_position_specific_discord_role_validation(
     user_id__user_obj, role_id__list_of_users, role_id__role, officer_discord_id__officer_full_name,
     exec_discord_role_id, members_id__role_ids,
     discord_id_for_users_that_should_be_in_exec_discord_group_role,
-    position_infos, matching_executive_roles, current_officers):
+        position_infos, matching_executive_roles, current_officers):
     """
     Populates members_id__role_ids, discord_id_for_users_that_should_be_in_exec_discord_group_role
     with the dictionary where the key is the discord user id and the value is the list of roles they need to have
